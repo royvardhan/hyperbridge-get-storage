@@ -32,14 +32,11 @@ contract Storage is HyperApp {
         return _host;
     }
 
-
-    function queryTokenBalance(
-        address token,
-        uint256 relayerFee,
-        bytes32 slot,
-        uint64 height,
-        uint64 timeout
-    ) public payable returns (bytes32 commitment) {
+    function queryTokenBalance(address token, uint256 relayerFee, bytes32 slot, uint64 height, uint64 timeout)
+        public
+        payable
+        returns (bytes32 commitment)
+    {
         bytes[] memory keys = new bytes[](1);
         keys[0] = abi.encodePacked(token, slot);
 
@@ -51,7 +48,6 @@ contract Storage is HyperApp {
             fee: relayerFee,
             context: new bytes(0)
         });
-
 
         if (msg.value > 0) {
             commitment = IDispatcher(_host).dispatch{value: msg.value}(get);
@@ -68,15 +64,13 @@ contract Storage is HyperApp {
         return commitment;
     }
 
-   
     function onGetResponse(IncomingGetResponse memory incoming) external override onlyHost {
         bytes32 commitment = keccak256(abi.encode(incoming.response.request));
 
         if (!pendingQueries[commitment]) {
             return;
         }
-        
-     
+
         StorageValue[] memory values = incoming.response.values;
         for (uint256 i = 0; i < values.length; i++) {
             queryResults[commitment][values[i].key] = values[i].value;
@@ -86,7 +80,6 @@ contract Storage is HyperApp {
         // Mark query as completed
         pendingQueries[commitment] = false;
     }
-
 
     function getQueryResult(bytes32 commitment, bytes calldata key) external view returns (bytes memory) {
         return queryResults[commitment][key];
