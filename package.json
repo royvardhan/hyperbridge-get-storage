@@ -1,0 +1,22 @@
+{
+  "name": "Demos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.5",
+  "dependencies": {
+    "@hyperbridge/core": "^1.5.2",
+    "@hyperbridge/sdk": "^1.6.1",
+    "@openzeppelin/contracts": "^5.4.0",
+    "@polytope-labs/solidity-merkle-trees": "^0.4.0",
+    "dotenv": "^17.2.4",
+    "viem": "^2.45.1",
+    "vitest": "^4.0.18"
+  }
+}
