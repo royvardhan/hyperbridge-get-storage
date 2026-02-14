@@ -2,7 +2,8 @@
 pragma solidity ^0.8.20;
 
 import {DispatchGet, IDispatcher} from "@hyperbridge/core/interfaces/IDispatcher.sol";
-import {IncomingGetResponse} from "@hyperbridge/core/interfaces/IApp.sol";
+import {GetRequest, IncomingGetResponse} from "@hyperbridge/core/interfaces/IApp.sol";
+import {Message} from "@hyperbridge/core/libraries/Message.sol";
 import {HyperApp} from "@hyperbridge/core/apps/HyperApp.sol";
 import {StorageValue} from "@polytope-labs/solidity-merkle-trees/src/Types.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -10,6 +11,7 @@ import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol
 
 contract Storage is HyperApp {
     using SafeERC20 for IERC20;
+    using Message for GetRequest;
 
     event StorageQueryDispatched(bytes32 indexed commitment, address token, bytes32 slot);
 
@@ -65,7 +67,7 @@ contract Storage is HyperApp {
     }
 
     function onGetResponse(IncomingGetResponse memory incoming) external override onlyHost {
-        bytes32 commitment = keccak256(abi.encode(incoming.response.request));
+        bytes32 commitment = incoming.response.request.hash();
 
         if (!pendingQueries[commitment]) {
             return;

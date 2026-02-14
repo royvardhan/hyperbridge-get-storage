@@ -194,6 +194,8 @@ describe("Storage", () => {
       keys: [...request.keys],
     });
 
+    console.log(`Commitment: ${commitment}`);
+
     // Consume status stream and self-relay when Hyperbridge has finalized
     for await (const status of indexer.getRequestStatusStream(commitment)) {
       const txUrl = status.metadata.transactionHash;
