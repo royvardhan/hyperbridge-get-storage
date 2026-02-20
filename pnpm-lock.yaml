@@ -12,8 +12,8 @@ importers:
         specifier: ^1.5.2
         version: 1.5.2
       '@hyperbridge/sdk':
-        specifier: ^1.5.1
-        version: 1.5.1(vite@6.4.1(@types/node@25.2.0))
+        specifier: ^1.6.1
+        version: 1.6.1(vite@6.4.1(@types/node@25.2.0))
       '@openzeppelin/contracts':
         specifier: ^5.4.0
         version: 5.4.0
@@ -205,8 +205,8 @@ packages:
   '@hyperbridge/core@1.5.2':
     resolution: {integrity: sha512-+RmuJQ8GB8zZpkRT9Ir/2fZa4fzW3lSYvTmAR4rTxpZRitej4K8yjaKPpZiaRjGbj1QCnQkOIWB/hpJ+Pxkz1w==}
 
-  '@hyperbridge/sdk@1.5.1':
-    resolution: {integrity: sha512-qDu1aFS6aeZhP48Odn5eQHtI4jGY/YhD4zw1JOvnjyeFmfeTeyTj95g3DJFrw+5y8sYmNDpgi1LyQgPh23vYQw==}
+  '@hyperbridge/sdk@1.6.1':
+    resolution: {integrity: sha512-q9eyegf5JtDWBI2XT9C1vQpSQrhLrXEwTB52v7Biw4Vh3yPBcaB/iDpppYHfSKA34NXkEKlpp/KbNFkv6dkSVQ==}
     engines: {node: '>=22.x.x'}
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0
@@ -1219,7 +1219,7 @@ snapshots:
       prettier: 3.8.1
       prettier-plugin-solidity: 1.4.3(prettier@3.8.1)
 
-  '@hyperbridge/sdk@1.5.1(vite@6.4.1(@types/node@25.2.0))':
+  '@hyperbridge/sdk@1.6.1(vite@6.4.1(@types/node@25.2.0))':
     dependencies:
       '@async-generator/merge-race': 1.0.3
       '@polkadot/api': 16.5.4
