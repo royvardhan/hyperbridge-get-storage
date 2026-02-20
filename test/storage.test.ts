@@ -38,7 +38,7 @@ const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238" as HexString;
 
 const SEPOLIA_STATE_ID = {
   stateId: { Evm: 11155111 },
-  consensusStateId: "0x45544830" as HexString,
+  consensusStateId: "ETH0", // Now supports simple strings
 };
 
 // --- Helpers -------------------------------------------------------------------------------------
