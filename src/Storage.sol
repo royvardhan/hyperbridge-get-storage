@@ -8,17 +8,20 @@ import {HyperApp} from "@hyperbridge/core/apps/HyperApp.sol";
 import {StorageValue} from "@polytope-labs/solidity-merkle-trees/src/Types.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {RLPReader} from "Solidity-RLP/contracts/RLPReader.sol";
 
 contract Storage is HyperApp {
     using SafeERC20 for IERC20;
     using Message for GetRequest;
+    using RLPReader for bytes;
+    using RLPReader for RLPReader.RLPItem;
 
     event StorageQueryDispatched(bytes32 indexed commitment, address token, bytes32 slot);
 
-    event StorageQueryReceived(bytes32 indexed commitment, bytes key, bytes value);
+    event StorageQueryReceived(bytes32 indexed commitment, bytes key, uint256 value);
 
     /// @notice Stores the results of storage queries (commitment => key => value)
-    mapping(bytes32 => mapping(bytes => bytes)) public queryResults;
+    mapping(bytes32 => mapping(bytes => uint256)) public queryResults;
 
     /// @notice Tracks pending queries (commitment => exists)
     mapping(bytes32 => bool) public pendingQueries;
@@ -75,15 +78,16 @@ contract Storage is HyperApp {
 
         StorageValue[] memory values = incoming.response.values;
         for (uint256 i = 0; i < values.length; i++) {
-            queryResults[commitment][values[i].key] = values[i].value;
-            emit StorageQueryReceived(commitment, values[i].key, values[i].value);
+            uint256 decoded = values[i].value.toRlpItem().toUint();
+            queryResults[commitment][values[i].key] = decoded;
+            emit StorageQueryReceived(commitment, values[i].key, decoded);
         }
 
         // Mark query as completed
         pendingQueries[commitment] = false;
     }
 
-    function getQueryResult(bytes32 commitment, bytes calldata key) external view returns (bytes memory) {
+    function getQueryResult(bytes32 commitment, bytes calldata key) external view returns (uint256) {
         return queryResults[commitment][key];
     }
 }

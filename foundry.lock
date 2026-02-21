@@ -1,4 +1,10 @@
 {
+  "lib/Solidity-RLP": {
+    "tag": {
+      "name": "v2.0.8",
+      "rev": "0212f8e754471da67fc5387df7855f47f944f925"
+    }
+  },
   "lib/forge-std": {
     "tag": {
       "name": "v1.14.0",

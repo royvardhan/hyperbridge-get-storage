@@ -2,3 +2,4 @@ forge-std/=lib/forge-std/src/
 @hyperbridge/core/=node_modules/@hyperbridge/core/contracts/
 @openzeppelin/contracts/=node_modules/@openzeppelin/contracts/
 @polytope-labs/solidity-merkle-trees/=node_modules/@polytope-labs/solidity-merkle-trees/
+Solidity-RLP/=lib/Solidity-RLP/
